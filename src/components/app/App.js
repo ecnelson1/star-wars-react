@@ -1,10 +1,10 @@
 import './App.css';
-import ListContainer from '../../containers/ListContainer/ListContainer';
+import PaginatedCharacters from '../../containers/ListContainer/ListContainer';
 
 function App() {
 
   return (
-    <ListContainer/>
+    <PaginatedCharacters charactersPerPage={10}/>
   );
 }
 

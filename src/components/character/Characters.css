@@ -1,0 +1,37 @@
+.li{
+border:2px solid red;
+background-color: black; 
+color: greenyellow;
+
+list-style-type: none;
+text-align: center;
+padding: 15px;
+}
+
+.name{
+    font-size: 20px;
+}
+
+.gender{
+    margin: 5px;
+}
+
+.hair-color{
+    margin: 5px;
+
+}
+
+.height{
+    margin: 5px;
+    color: purple;
+}
+
+.mass{
+    margin: 5px;
+    color: red;
+}
+
+body{
+    background-color: black;
+}
+

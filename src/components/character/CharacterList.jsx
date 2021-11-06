@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import './Characters.css';
 function CharacterList({characters}){
     return (
       <ul aria-label="character-list">
         {characters.map((character) => (
-          <li key={character.name}>
-            <h1>{character.namer}</h1>
-            <div>{character.gender}</div>
-            <div>{character.hair_color}</div>
-            <div>{character.height}</div>
-            <div>{character.mass}</div>
+          <li  className='li' key={character.name}>
+            <h1 className="name">{character.name}</h1>
+            <div className="gender">Gender: {character.gender}</div>
+            <div className="hair-color">Hair Color: {character.hair_color}</div>
+            <div className="height">Height: {character.height}</div>
+            <div className="mass">Mass: {character.mass}</div>
           </li>
         ))}
       </ul>
