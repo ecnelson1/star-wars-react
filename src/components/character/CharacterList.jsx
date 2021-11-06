@@ -18,7 +18,7 @@ function CharacterList({characters}){
 }
 
 CharacterList.propTypes = {
-  character: PropTypes.arrayOf(
+  characters: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       gender: PropTypes.string.isRequired,

@@ -1,12 +1,10 @@
 import './App.css';
-
+import ListContainer from '../../containers/ListContainer/ListContainer';
 
 function App() {
 
   return (
-    <div className="App">
-    Hello World
-    </div>
+    <ListContainer/>
   );
 }
 
