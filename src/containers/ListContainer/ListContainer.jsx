@@ -1,47 +1,54 @@
 import React, {useState, useEffect} from 'react';
 import CharacterList from '../../components/character/CharacterList';
-import { useCharacters } from '../../hooks/character-hook';
-import { getCharactersBySearch, getCharactersByPage } from '../../services/api-utils';
+import { getCharactersBySearch} from '../../services/api-utils';
+
 
 const ListContainer = () => {
     const [search, setSearch] = useState('')
-    const [loading, characters, setCharacters] = useCharacters(search);
+    const [characters, setCharacters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [pages, setPages] = useState();
+    const [loading, setLoading] = useState(true)
+   
 
     const handleNext = () => {
-      setCurrentPage(currentPage + 1);
+        if(currentPage < pages){
+      setCurrentPage(currentPage + 1 );
+        } else {
+            return;
+        }
     };
     const handlePrev = () => {
+        if(currentPage > 1){
       setCurrentPage(currentPage - 1);
+        } else {
+            return;
+        }
     };
 
     const handleSearchChange = (event) =>{
         setSearch(event.target.value)
     }
 
-    const handleSubmit= async (event) =>{
+    const handleSubmit= (event) =>{
         event.preventDefault();
-        await getCharactersBySearch(search);
+        getCharactersBySearch(search, currentPage)
+        .then((res)=>setPages(res.count/10))
+        .then(setLoading(false));
     }
 
-     useEffect(() => {
-       getCharactersByPage(currentPage).then((characters) =>
-         setCharacters(
-           characters.results.sort((a, b) => {
-             if (a.name < b.name) {
-               return -1;
-             }
-             if (a.name > b.name) {
-               return 1;
-             }
-             return 0;
-           })
-         )
-       );
-     }, [currentPage, setCharacters]);
+      useEffect(() => {
+       getCharactersBySearch(search, currentPage)
+         .then((res) => {
+           setCharacters(res.sorted);
+           const count = res.count;
+           setPages(count / 10);
+         })
+         .finally(setLoading(false));
+     }, [search, currentPage]);
 
     return (
-      <div>
+      <div title='list-container'>
         <form className="search-form" onSubmit={handleSubmit}>
           <input
             placeholder="Enter character name to search"
@@ -54,8 +61,8 @@ const ListContainer = () => {
         ) : (
           <>
             <CharacterList characters={characters} />{" "}
-            <button onClick={handleNext}>Next Page</button>
             <button onClick={handlePrev}>Prev Page</button>
+            <button onClick={handleNext}>Next Page</button>
           </>
         )}
       </div>

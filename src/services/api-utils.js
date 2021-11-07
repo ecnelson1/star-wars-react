@@ -1,10 +1,17 @@
-export const getCharactersBySearch = async (searchTerm) => {
-    const res = await fetch(`https://swapi.dev/api/people/?search=${searchTerm}`);
+export const getCharactersBySearch = async (searchTerm, pageNumber) => {
+    const res = await fetch(`https://swapi.dev/api/people/?search=${searchTerm}&page=${pageNumber}`);
     const results = await res.json();
-    return results.results
-}
-export const getCharactersByPage = async (pageNumber) => {
-  const res = await fetch(`https://swapi.dev/api/people/?page=${pageNumber}`);
-  const results = await res.json();
-  return results;
+    const count = results.count
+    const sorted = results.results.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+    return {sorted, count}
 };
+
+

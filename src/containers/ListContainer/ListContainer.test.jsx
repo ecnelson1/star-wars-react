@@ -12,14 +12,6 @@ const server = setupServer(rest.get('https://swapi.dev/api/people', (req, res, c
 describe('ListContainer', () => {
     beforeAll(()=> server.listen());
     afterAll(()=> server.close());
-
-    it('renders a loading element', async () => {
-        render(<ListContainer/>);
-        const loading = screen.getByText('LOADING...');
-        expect(loading).toMatchSnapshot();
-       
-    });
-    
     it('renders a list of Star Wars characters', async ()=>{
         render(<ListContainer/>);
         const ul = await screen.findByRole('list', {name: 'character-list'});
