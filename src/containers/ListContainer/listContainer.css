@@ -24,3 +24,13 @@
 margin: 20px;
 padding: 20px;
 }
+.searchField{
+    margin-left: 100px;
+    width: 500px;
+    text-align: center;
+    font-weight: bolder;
+}
+.loading{
+    color: lawngreen;
+    font-size: larger;
+}

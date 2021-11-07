@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import CharacterList from '../../components/character/CharacterList';
 import { reducedAvg } from '../../hooks/reduceAvg/reduceAvg-hook';
-import { getCharactersBySearch} from '../../services/api-utils';
+import { getCharactersBySearch } from '../../services/api-utils';
 import './listContainer.css'
 
 const ListContainer = () => {
@@ -57,11 +57,11 @@ const ListContainer = () => {
           <input
             placeholder="Enter character name to search"
             value={search}
-            onChange={handleSearchChange}
+            onChange={handleSearchChange} className='searchField'
           />
         </form>
         {loading ? (
-          <h1>LOADING...</h1>
+          <h1 className='loading'>LOADING...</h1>
         ) : (
           <>
             <CharacterList characters={characters} />{" "}
