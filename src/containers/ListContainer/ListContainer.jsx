@@ -10,7 +10,8 @@ const ListContainer = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pages, setPages] = useState();
     const [loading, setLoading] = useState(true)
-    const {mass, height} = reducedAvg(characters);
+    const averages = reducedAvg(characters);
+    
     
 
     const handleNext = () => {
@@ -30,6 +31,7 @@ const ListContainer = () => {
 
     const handleSearchChange = (event) =>{
         setSearch(event.target.value)
+        setCurrentPage(1)
     }
 
     const handleSubmit= (event) =>{
@@ -63,10 +65,14 @@ const ListContainer = () => {
         ) : (
           <>
             <CharacterList characters={characters} />{" "}
-            <span className="avg">{mass}</span>
-            <span className="avg">{height}</span>
+            <div className='avg'>
+            <span className="avgM"> Avg Mass for known sizes: {averages[0].mass}</span>
+            <span className="avgH">Avg Height for known sizes: {averages[0].height}</span>
+            </div>
+            <div className='pageNav'>
             <button onClick={handlePrev}>Prev Page</button>
             <button onClick={handleNext}>Next Page</button>
+            </div>
           </>
         )}
       </div>
