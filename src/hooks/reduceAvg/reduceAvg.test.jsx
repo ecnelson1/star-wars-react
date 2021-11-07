@@ -5,11 +5,12 @@ it('takes in an array and returns the average of all the mass and height attribu
     const array = [
       { mass: 100, height: 95 },
       { mass: 300, height: 210 },
-      { mass: 75, height: 75 },
+      { mass: 75, height: 'unknown' },
+      {mass: "unknown", height:50}
     ];
 
      const average = reducedAvg(array)
 
-     expect(average).toEqual({mass:158.33, height:126.67, })
+     expect(average).toEqual([{mass:158.33, height:118.33, }])
 })
 })
